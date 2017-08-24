@@ -17,6 +17,9 @@ sudo apt-get update
 sudo apt-get upgrade
 ````
 
+Docker compose then needs to be installed, for which the directions can be found [on the docker website](https://docs.docker.com/compose/install/).
+
+
 ## Storage requirements
 
 The image pyramid is large, approximately 12 TB in size.
@@ -31,13 +34,13 @@ Once these drives are inserted, these should be formatted, which is described [i
 The disks should then be setup to allow easy mounting in the future.
 Upon connecting to the computer, these will then need formatting.
 One should first determine where the drive is located
-````
+````bash
 lsblk --output NAME,LABEL,UUID,MOUNTPOINT,SIZE
 ````
 
 This will give an output along the lines of:
 
-````
+````bash
 NAME   LABEL     UUID                                 MOUNTPOINT                SIZE
 sda                                                                           465.8G
 ├─sda1 ESP       CA75-A471                            /boot/efi                 600M
@@ -50,27 +53,27 @@ sdb                                                                            1
 You will want to look for a drive which has no LABEL, and a size of 14.6T.
 
 Assuming this is located at `sdb` these can be formatted as following **NB: double check this location and change as appropriate, if it is listed as sdc change all sdb to sdc**
-````
+````bash
 sudo parted -a optimal /dev/sdb mklabel gpt
 sudo parted -a optimal /dev/sdb -- mkpart primary ext 1 -1
 sudo mkfs.ext4 -b 4096 -i 65536 -L FAFB_RAID /dev/sdb1 -m 0
 ````
 
 The location of the drives should then be set up and the drives mounted.
-````
+````bash
 sudo mkdir /FAFB_RAID
 sudo mount -L FAFB_RAID /FAFB_RAID
 sudo chown -R $USER:$USER /FAFB_RAID
 ````
 
 In order to mount these drives upon reboot, the `/etc/fstab` file should be modified. This should be done using the unique device ID to this file
-````
+````bash
 UUID=$(lsblk /dev/disk/by-label/FAFB_RAID --output UUID | sed -n 2p)
 echo "UUID=$UUID /FAFB_RAID      ext4      rw,noatime,data=writeback   0    0" >> sudo /etc/fstab
 ````
 
 The base level directory should be created. Assuming you are downloading the recommended v14 alignment
-````
+````bash
 mkdir /FAFB_RAID/v14_align_tps
 ````
 This should be changed to v13_align_tps if using the data to confirm Zheng, Lauritzen et al. (2017)
