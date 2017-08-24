@@ -66,7 +66,7 @@ sudo chown -R $USER:$USER /FAFB_RAID
 In order to mount these drives upon reboot, the `/etc/fstab` file should be modified. This should be done using the unique device ID to this file
 ````
 UUID=$(lsblk /dev/disk/by-label/FAFB_RAID --output UUID | sed -n 2p)
-echo "UUID=$UUID /FAFB_RAID      ext4      rw,noatime,data=writeback   0    0" >> /etc/fstab
+echo "UUID=$UUID /FAFB_RAID      ext4      rw,noatime,data=writeback   0    0" >> sudo /etc/fstab
 ````
 
 The download script can then be run:
