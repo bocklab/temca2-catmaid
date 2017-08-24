@@ -75,6 +75,6 @@ mkdir /FAFB_RAID/v14_align_tps
 ````
 This should be changed to v13_align_tps if using the data to confirm Zheng, Lauritzen et al. (2017)
 
-The download script can then be run:
+The download script can then be run. (See download.md)
 
 
