@@ -49,7 +49,7 @@ sdb                                                                            1
 
 You will want to look for a drive which has no LABEL, and a size of 14.6T.
 
-Assuming this is located at `sdb` these can be formatted as following *NB: double check this location and change as appropriate, if it is listed as sdc change all sdb to sdc*
+Assuming this is located at `sdb` these can be formatted as following **NB: double check this location and change as appropriate, if it is listed as sdc change all sdb to sdc**
 ````
 sudo parted -a optimal /dev/sdb mklabel gpt
 sudo parted -a optimal /dev/sdb -- mkpart primary ext 1 -1
@@ -62,3 +62,4 @@ sudo mkdir /FAFB_RAID
 sudo mount -L FAFB_RAID /FAFB_RAID
 sudo chown -R $USER:$USER /FAFB_RAID
 ````
+
