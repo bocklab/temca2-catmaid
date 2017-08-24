@@ -69,6 +69,12 @@ UUID=$(lsblk /dev/disk/by-label/FAFB_RAID --output UUID | sed -n 2p)
 echo "UUID=$UUID /FAFB_RAID      ext4      rw,noatime,data=writeback   0    0" >> sudo /etc/fstab
 ````
 
+The base level directory should be created. Assuming you are downloading the recommended v14 alignment
+````
+mkdir /FAFB_RAID/v14_align_tps
+````
+This should be changed to v13_align_tps if using the data to confirm Zheng, Lauritzen et al. (2017
+
 The download script can then be run:
 
 
