@@ -27,7 +27,7 @@ class StreamWrapper:
         widgets = [progressbar.Percentage(), ' ', progressbar.Bar(), ' ', progressbar.ETA(), ' ', progressbar.FileTransferSpeed()]
         self.pbar =  progressbar.ProgressBar(widgets=widgets, max_value=self.total_size).start()
         
-    def read(self, bufsize):
+    def read(self, bufsize=BUFFER_SIZE):
         result = self.stream.read(bufsize)
         self.hash.update(result)
         self.bytes_read += len(result)
@@ -38,6 +38,9 @@ class StreamWrapper:
         return self.hash
 
     def close(self):
+        # Keep reading the data beyond the end of the tar stream to get the correct hash.
+        while self.read():
+            continue
         self.pbar.finish()
 
 class InvalidChecksum(Exception):
