@@ -29,7 +29,7 @@ docker build . -t fafb_download
 
 Then run the container, being sure to mountain the destination volume:
 ```
-docker run --volume /path/to/save/data/to:/data --rm fafb_download --datapath /data --dryrun
+docker run --volume /path/to/save/data/to:/data --rm --tty fafb_download --datapath /data
 ```
 
 ## Notes
