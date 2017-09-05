@@ -5,12 +5,17 @@ services:
     app:
      environment:
        - CM_EXAMPLE_PROJECTS=false
-     #command: bash /upload_to_postgres.sh
-  
+     volumes:
+       - ../temca2/upload_to_database.sh:/home/scripts/docker/upload_to_database.sh
+       - ../temca2/v13.sql:/v13.sql 
+       - ./volumes/app/.first_run_file:/.first_run_file
+     entrypoint: /home/scripts/docker/upload_to_database.sh -
+     
     web:
-      build: web
       ports:
-        - "8001:80"
+        - "8001:8001"
       volumes:
-        - /FAFB_RAID:/data/external
+        - /TEMCA2_RAID:/data/external
         - ../temca2/temca2_v13:/etc/nginx/sites-available/temca2v_13
+        - ../temca2/temca2_v13:/etc/nginx/conf.d/temca2v_13.conf
+        - ../pyramid_top:/data/built_in
