@@ -24,7 +24,7 @@ Docker compose then needs to be installed, for which the directions can be found
 
 The image pyramid is large, approximately 12 TB in size.
 This will need to be mounted (not symlinked), at a specific location.
-For these purposes, we assume that you have a RAID setup mounted at `/FAFB_RAID`.
+For these purposes, we assume that you have a RAID setup mounted at `/TEMCA_RAID`. If you change this directory, you will need to edit the install instructions to point to this new location.
 
 We have tested it with an external RAID-enclosure and have gotten adequate performance for CATMAID.
 
@@ -56,25 +56,25 @@ Assuming this is located at `sdb` these can be formatted as following **NB: doub
 ````bash
 sudo parted -a optimal /dev/sdb mklabel gpt
 sudo parted -a optimal /dev/sdb -- mkpart primary ext 1 -1
-sudo mkfs.ext4 -b 4096 -i 65536 -L FAFB_RAID /dev/sdb1 -m 0
+sudo mkfs.ext4 -b 4096 -i 65536 -L TEMCA_RAID /dev/sdb1 -m 0
 ````
 
 The location of the drives should then be set up and the drives mounted.
 ````bash
-sudo mkdir /FAFB_RAID
-sudo mount -L FAFB_RAID /FAFB_RAID
-sudo chown -R $USER:$USER /FAFB_RAID
+sudo mkdir /TEMCA_RAID
+sudo mount -L TEMCA_RAID /TEMCA_RAID
+sudo chown -R $USER:$USER /TEMCA_RAID
 ````
 
 In order to mount these drives upon reboot, the `/etc/fstab` file should be modified. This should be done using the unique device ID to this file
 ````bash
-UUID=$(lsblk /dev/disk/by-label/FAFB_RAID --output UUID | sed -n 2p)
-echo "UUID=$UUID /FAFB_RAID      ext4      rw,noatime,data=writeback   0    0" | sudo tee -a /etc/fstab
+UUID=$(lsblk /dev/disk/by-label/TEMCA_RAID --output UUID | sed -n 2p)
+echo "UUID=$UUID /TEMCA_RAID      ext4      rw,noatime,data=writeback   0    0" | sudo tee -a /etc/fstab
 ````
 
 The base level directory should be created. Assuming you are downloading the recommended v14 alignment
 ````bash
-mkdir /FAFB_RAID/v14_align_tps
+mkdir /TEMCA_RAID/v14_align_tps
 ````
 This should be changed to v13_align_tps if using the data to confirm Zheng, Lauritzen et al. (2017)
 
