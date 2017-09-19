@@ -55,7 +55,7 @@ You will want to look for a drive which has no LABEL, and a size of 14.6T.
 Assuming this is located at `sdb` these can be formatted as following **NB: double check this location and change as appropriate, if it is listed as sdc change all sdb to sdc**
 ````bash
 sudo parted -a optimal /dev/sdb mklabel gpt
-sudo parted -a optimal /dev/sdb -- mkpart primary ext 1 -1
+sudo parted -a optimal /dev/sdb -- mkpart primary ext4 1 -1
 sudo mkfs.ext4 -b 4096 -i 65536 -L TEMCA_RAID /dev/sdb1 -m 0
 ````
 
