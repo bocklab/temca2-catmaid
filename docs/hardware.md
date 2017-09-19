@@ -56,25 +56,25 @@ Assuming this is located at `sdb` these can be formatted as following **NB: doub
 ````bash
 sudo parted -a optimal /dev/sdb mklabel gpt
 sudo parted -a optimal /dev/sdb -- mkpart primary ext4 1 -1
-sudo mkfs.ext4 -b 4096 -i 65536 -L TEMCA_RAID /dev/sdb1 -m 0
+sudo mkfs.ext4 -b 4096 -i 65536 -L TEMCA2_RAID /dev/sdb1 -m 0
 ````
 
 The location of the drives should then be set up and the drives mounted.
 ````bash
-sudo mkdir /TEMCA_RAID
-sudo mount -L TEMCA_RAID /TEMCA_RAID
-sudo chown -R $USER:$USER /TEMCA_RAID
+sudo mkdir /TEMCA2_RAID
+sudo mount -L TEMCA2_RAID /TEMCA2_RAID
+sudo chown -R $USER:$USER /TEMCA2_RAID
 ````
 
 In order to mount these drives upon reboot, the `/etc/fstab` file should be modified. This should be done using the unique device ID to this file
 ````bash
-UUID=$(lsblk /dev/disk/by-label/TEMCA_RAID --output UUID | sed -n 2p)
-echo "UUID=$UUID /TEMCA_RAID      ext4      rw,noatime,data=writeback   0    0" | sudo tee -a /etc/fstab
+UUID=$(lsblk /dev/disk/by-label/TEMCA2_RAID --output UUID | sed -n 2p)
+echo "UUID=$UUID /TEMCA2_RAID      ext4      rw,noatime,data=writeback   0    0" | sudo tee -a /etc/fstab
 ````
 
 The base level directory should be created. Assuming you are downloading the recommended v14 alignment
 ````bash
-mkdir /TEMCA_RAID/v14_align_tps
+mkdir /TEMCA2_RAID/v14_align_tps
 ````
 This should be changed to v13_align_tps if using the data to confirm Zheng, Lauritzen et al. (2017)
 
