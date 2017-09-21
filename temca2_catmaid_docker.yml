@@ -5,9 +5,10 @@ services:
     app:
      environment:
        - CM_EXAMPLE_PROJECTS=false
+       - CM_IMPORTED_SKELETON_FILE_MAXIMUM_SIZE=10485760
      volumes:
        - ../temca2/upload_to_database.sh:/home/scripts/docker/upload_to_database.sh
-       - ../temca2/v13.sql:/v13.sql 
+       - ../temca2/v14.sql:/v14.sql 
        - ./volumes/app/.first_run_file:/.first_run_file
      entrypoint: /home/scripts/docker/upload_to_database.sh -
      
@@ -16,6 +17,6 @@ services:
         - "8001:8001"
       volumes:
         - /TEMCA2_RAID:/data/external
-        - ../temca2/temca2_v13:/etc/nginx/sites-available/temca2v_13
-        - ../temca2/temca2_v13:/etc/nginx/conf.d/temca2v_13.conf
+        - ../temca2/temca2_v14:/etc/nginx/sites-available/temca2_v14
+        - ../temca2/temca2_v14:/etc/nginx/conf.d/temca2_v14.conf
         - ../pyramid_top:/data/built_in

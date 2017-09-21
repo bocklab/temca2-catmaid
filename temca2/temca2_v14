@@ -1,13 +1,12 @@
 server {
-       listen 8000
-       server_name localhost _;
+       listen 8001;
 
        location ~ /v14_align_tps/(.*) {
        		add_header Access-Control-Allow-Origin *;
 		root /;
 		try_files /data/built_in/v14_align_tps/$1 /data/external/v14_align_tps/$1 /data/built_in/v14_align_tps/black.jpg =404;
 		access_log off;
-		expires 4m
+		expires 4m;
 		add_header Cache-Control no-cache;
 		}
 	}

@@ -31,7 +31,7 @@ if [ $n_run -ne 2 ]; then
     sleep 1
     PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d postgres -c "CREATE DATABASE $DB_NAME;"
     echo "Recreating database."
-    PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME < /v14.sql
+    PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME < /v13.sql
     echo "Done."
     sleep 5
     echo "Initialised." > /.first_run_file/run
