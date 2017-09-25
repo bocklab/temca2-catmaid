@@ -24,7 +24,7 @@ Docker compose then needs to be installed, for which the directions can be found
 
 The image pyramid is large, approximately 12 TB in size.
 This will need to be mounted (not symlinked), at a specific location.
-For these purposes, we assume that you have a RAID setup mounted at `/TEMCA_RAID`. If you change this directory, you will need to edit the install instructions to point to this new location.
+For these purposes, we assume that you have a RAID setup mounted at `/TEMCA2_RAID`. If you change this directory, you will need to edit the install instructions to point to this new location.
 
 We have tested it with an external RAID-enclosure and have gotten adequate performance for CATMAID.
 
