@@ -121,10 +121,11 @@ def main():
     parser.add_argument("--dryrun", default=False, action="store_true", help="Read-only: do not extract tar archives")
     parser.add_argument("--first", default=1, type=int, help="First section to download")
     parser.add_argument("--last", default=7062, type=int, help="Last section to download")
+    parser.add_argument("--version", default=14, type=int, help="Alignment version number")
 
     args = parser.parse_args()
 
-    checksums = get_checksums("%s/%s" % (args.source, args.checksumfile))
+    checksums = get_checksums("%s/v%d/%s" % (args.source, args.version, args.checksumfile))
     checkpoint = CheckpointFile("%s/%s" % (args.datapath, args.checkpointfile))
 
     # Download the empty tile.  This should be part of the docker image.
@@ -134,8 +135,8 @@ def main():
         if layer in checkpoint:
             print ("Already downloaded %d; skipping" % layer)
             continue
-        filename = "temca2.13.0.%d.tar" % layer
-        layer_url = "%s/%s" % (args.source, filename)
+        filename = "temca2.%d.0.%d.tar" % (args.version, layer)
+        layer_url = "%s/v%d/%s" % (args.source, args.version, filename)
         get_archive(layer_url, args.datapath, checksum=checksums[filename], dryrun=args.dryrun, name=str(layer))
         checkpoint.addSection(layer)
         checkpoint.writeCheckpoint()
