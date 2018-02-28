@@ -26,7 +26,7 @@ done
 if [ $n_run -ne 2 ]; then
     echo "Need to recreate database."
     # Wait to avoid "panic: Failed to open sql connection pq: the database system is starting up"
-    sleep 1
+    sleep 10
     PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d postgres -c "DROP DATABASE $DB_NAME;"
     sleep 1
     PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d postgres -c "CREATE DATABASE $DB_NAME;"
