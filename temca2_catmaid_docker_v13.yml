@@ -6,7 +6,7 @@ services:
      environment:
        - CM_EXAMPLE_PROJECTS=false
      volumes:
-       - ../temca2/upload_to_database.sh:/home/scripts/docker/upload_to_database_v13.sh
+       - ../temca2/upload_to_database_v13.sh:/home/scripts/docker/upload_to_database_v13.sh
        - ../temca2/v13.sql:/v13.sql 
        - ./volumes/app/.first_run_file:/.first_run_file
      entrypoint: /home/scripts/docker/upload_to_database_v13.sh -
