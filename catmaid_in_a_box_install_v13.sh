@@ -7,5 +7,5 @@ tar -xf /tmp/level_8.tar -C pyramid_top
 wget -O /tmp/level_7.tar https://www.dropbox.com/s/2s2r7imvjwtkhy2/level_7.tar?dl=1
 tar -xf /tmp/level_7.tar -C pyramid_top
 
-docker pull catmaid/catmaid:latest
+git clone https://www.github.com/catmaid/catmaid-docker
 docker-compose -f catmaid-docker/docker-compose.yml -f temca2_catmaid_docker.yml build
