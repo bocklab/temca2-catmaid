@@ -7,5 +7,4 @@ tar -xf /tmp/level_8.tar -C pyramid_top/v14_align_tps
 wget -O /tmp/level_7.tar https://www.dropbox.com/s/41x48a3fjswzphm/level_7.tar?dl=0
 tar -xf /tmp/level_7.tar -C pyramid_top/v14_align_tps
 
-git clone https://www.github.com/catmaid/catmaid-docker
 docker-compose -f catmaid-docker/docker-compose.yml -f temca2_catmaid_docker.yml build
