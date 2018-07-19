@@ -18,10 +18,11 @@ fi
 
 n_run=$(ls -l /.first_run_file | wc -l)
 echo "Wait until database $DB_HOST:$DB_PORT is ready..."
-until nc -z $DB_HOST $DB_PORT
-do
-    sleep 1
-done
+#until nc -z $DB_HOST $DB_PORT
+#do
+#    sleep 1
+#done
+sleep 60
 
 if [ $n_run -ne 2 ]; then
     echo "Need to recreate database."
