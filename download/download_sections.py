@@ -114,7 +114,7 @@ def get_archive(url, path, checksum=None, dryrun=False, name=""):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--source", default="http://temca2data.janelia.org", help="Base URL to download data from")
+    parser.add_argument("--source", default="https://download.temca2data.org", help="Base URL to download data from")
     parser.add_argument("--datapath", required=True, help="Path to store image data")
     parser.add_argument("--checkpointfile", default="checkpoint.txt", help="Filename (under datapath) to checkpoint")
     parser.add_argument("--checksumfile", default="temca2_md5.md5", help="Filename (under source) to find md5 file")
