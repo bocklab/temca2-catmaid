@@ -74,12 +74,16 @@ class CheckpointFile():
 
 def get_checksums(url):
     print("Downloading hash file...")
-    reader = csv.reader(io.StringIO(requests.get(url).text), delimiter='\t')
-    checksums = {}
-    for checksum, filename in reader:
-        checksums[filename] = checksum
-    print("Done")
-    return checksums
+    r = requests.get(url)
+    if r.ok:
+        reader = csv.reader(io.StringIO(r.text), delimiter='\t')
+        checksums = {}
+        for checksum, filename in reader:
+            checksums[filename] = checksum
+        print("Done")
+        return checksums
+    else:
+        raise Exception("Could not fetch %s (%d)" % (url, r.status_code))
 
 def get_single_file(url, dest, dryrun=False):
     """Download a single file."""
